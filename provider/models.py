@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from phone_field import PhoneField
 
 
 # Create your models here.
@@ -12,8 +13,8 @@ class Provider(models.Model):
     city = models.CharField(max_length=30)
     state = models.CharField(max_length=30)
     zip = models.CharField(max_length=5)
-    phone = models.CharField(max_length=10, null=True)
-    fax = models.CharField(max_length=10, null=True)
+    phone = PhoneField(blank=True, help_text='Contact phone number')
+    fax = PhoneField(blank=True, help_text='Contact phone number')
     email = models.EmailField(max_length=50)
     start_time = models.TimeField(null=True)
     end_time = models.TimeField(null=True)
@@ -23,6 +24,13 @@ class Provider(models.Model):
 class Contact(models.Model):
     title = models.CharField(max_length= 100)
     first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length = 50)
+    last_name = models.CharField(max_length=50)
+    mobile_number = PhoneField(blank=True, help_text='Contact phone number')
+    office_phone = PhoneField(blank=True, help_text='Contact phone number')
+    fax = PhoneField(blank=True, help_text='Contact phone number')
+    toll_fee = PhoneField(blank=True, help_text='Contact phone number')
+    email = models.EmailField(max_length=50)
+
+
 
 
