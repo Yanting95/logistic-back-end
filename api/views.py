@@ -10,8 +10,8 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 
-from provider.models import Provider, Contact
-from api.serializers import ProviderSerializer, UserSerializer, ContactSerializer
+from provider.models import Provider, Contact, Note
+from api.serializers import ProviderSerializer, UserSerializer, ContactSerializer, NoteSerializer
 
 
 @api_view(['GET', 'POST'])
@@ -57,50 +57,6 @@ def provider_detail(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['GET', 'POST'])
-def contact_list(request, pk):
-
-    if request.method == 'GET':
-        contact = Contact.objects.filter(provider=pk)
-        serializer = ContactSerializer(contact, many=True)
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
-        serializer = ContactSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def contact_detail(request, pk):
-
-    try:
-        contact = Contact.objects.get(pk=pk)
-    except Contact.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'GET':
-        contact_detail1 = Contact.objects.get(pk=pk)
-        serializer = ContactSerializer(contact_detail1)
-        return Response(serializer.data)
-
-    elif request.method == 'PUT':
-        serializer = ContactSerializer(contact, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == 'DELETE':
-        contact.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-
 @api_view(["POST"])
 @permission_classes((AllowAny,))
 def login(request):
@@ -118,3 +74,89 @@ def login(request):
     return Response({'user': serializer.data,
                      'token': token.key},
                     status=HTTP_200_OK)
+
+
+@api_view(['GET', 'POST'])
+def contact_list(request, pkp):
+
+    if request.method == 'GET':
+        contact = Contact.objects.filter(provider=pkp)
+        serializer = ContactSerializer(contact, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = ContactSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def contact_detail(request, pkp, pk):
+
+    try:
+        contact = Contact.objects.get(provider=pkp, pk=pk)
+    except Contact.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        contact_detail = Contact.objects.get(pk=pk)
+        serializer = ContactSerializer(contact_detail)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = ContactSerializer(contact, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        contact.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET', 'POST'])
+def note_list(request, pkp):
+
+    if request.method == 'GET':
+        note = Note.objects.filter(provider=pkp)
+        serializer = NoteSerializer(note, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = NoteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def note_detail(request, pkp, pk):
+
+    try:
+        note = Note.objects.get(provider=pkp, pk=pk)
+    except Note.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        note_detail = Note.objects.get(pk=pk)
+        serializer = NoteSerializer(note_detail)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = NoteSerializer(note, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        note.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

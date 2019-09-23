@@ -1,11 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from phone_field import PhoneField
 
 
 # Create your models here.
-
-
 class Provider(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
@@ -22,7 +19,7 @@ class Provider(models.Model):
 
 
 class Contact(models.Model):
-    title = models.CharField(max_length= 100)
+    title = models.CharField(max_length=30, null=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     mobile_number = PhoneField(blank=True, help_text='Contact phone number')
