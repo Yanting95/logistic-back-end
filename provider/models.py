@@ -13,8 +13,8 @@ class Provider(models.Model):
     city = models.CharField(max_length=30)
     state = models.CharField(max_length=30)
     zip = models.CharField(max_length=5)
-    phone = PhoneField(blank=True, help_text='Contact phone number')
-    fax = PhoneField(blank=True, help_text='Contact phone number')
+    phone = PhoneField(blank=True, help_text='Contact phone number', default='000000000')
+    fax = PhoneField(blank=True, help_text='Contact phone number', default='000000000')
     email = models.EmailField(max_length=50)
     start_time = models.TimeField(null=True)
     end_time = models.TimeField(null=True)
@@ -27,10 +27,10 @@ class Contact(models.Model):
     last_name = models.CharField(max_length=50)
     mobile_number = PhoneField(blank=True, help_text='Contact phone number')
     office_phone = PhoneField(blank=True, help_text='Contact phone number')
-    fax = PhoneField(blank=True, help_text='Contact phone number')
+    fax_number = PhoneField(blank=True, help_text='Contact phone number')
     toll_fee = PhoneField(blank=True, help_text='Contact phone number')
     email = models.EmailField(max_length=50)
-
+    provider = models.ForeignKey(Provider, related_name='contact', on_delete=models.DO_NOTHING, null=True)
 
 
 

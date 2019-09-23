@@ -58,10 +58,10 @@ def provider_detail(request, pk):
 
 
 @api_view(['GET', 'POST'])
-def contact_list(request):
+def contact_list(request, pk):
 
     if request.method == 'GET':
-        contact = Contact.objects.all()
+        contact = Contact.objects.filter(provider=pk)
         serializer = ContactSerializer(contact, many=True)
         return Response(serializer.data)
 
