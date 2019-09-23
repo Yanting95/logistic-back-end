@@ -35,4 +35,3 @@ class Note(models.Model):
     note = models.TextField()
     created = models.DateField(auto_now=True)
     provider = models.ForeignKey(Provider, related_name='note', on_delete=models.DO_NOTHING)
-
