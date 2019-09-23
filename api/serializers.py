@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from provider.models import Provider
+from provider.models import Provider, Contact, Note
 
 
 class ProviderSerializer(serializers.ModelSerializer):
@@ -16,3 +16,17 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email')
+
+
+class ContactSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Contact
+        fields = ('title', 'first_name', 'last_name', 'mobile', 'phone', 'fax', 'email')
+
+
+class NoteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Note
+        fields = ('note', 'created', 'provider')
