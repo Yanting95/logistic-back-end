@@ -8,7 +8,7 @@ class ProviderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Provider
         fields = ('id', 'name', 'address', 'country', 'city', 'state', 'zip',
-                  'phone', 'fax', 'email', 'start_time', 'end_time', 'user')
+                  'phone', 'fax', 'toll_fee', 'email', 'start_time', 'end_time', 'user')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -22,7 +22,7 @@ class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = ('title', 'first_name', 'last_name', 'mobile', 'phone', 'fax', 'email')
+        fields = ('title', 'first_name', 'last_name', 'mobile', 'phone', 'fax', 'toll_fee', 'email')
 
 
 class NoteSerializer(serializers.ModelSerializer):
