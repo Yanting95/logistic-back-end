@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
+
+
 class Provider(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
@@ -16,3 +18,11 @@ class Provider(models.Model):
     start_time = models.TimeField(null=True)
     end_time = models.TimeField(null=True)
     user = models.ForeignKey(User, related_name='provider_user', on_delete=models.DO_NOTHING, null=True)
+
+
+class Contact(models.Model):
+    title = models.CharField(max_length= 100)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length = 50)
+
+
