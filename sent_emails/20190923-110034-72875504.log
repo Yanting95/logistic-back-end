@@ -1,0 +1,26 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: dallas0309@gmail.com
+Date: Mon, 23 Sep 2019 15:00:34 -0000
+Message-ID: 
+ <156925083457.16524.457832923197850677@DESKTOP-5J2LPB8.fios-router.home>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/account/reset/NQ/59z-5418d20fb6ee25ca40d0/
+
+Your username, in case you've forgotten: dallas0309
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------
