@@ -123,7 +123,7 @@ def contact_detail(request, pkp, pk):
 def note_list(request, pkp):
 
     if request.method == 'GET':
-        note = Note.objects.filter(provider=pkp)
+        note = Note.objects.filter(provider=pkp).order_by('-created')
         serializer = NoteSerializer(note, many=True)
         return Response(serializer.data)
 

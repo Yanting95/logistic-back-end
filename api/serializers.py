@@ -8,25 +8,25 @@ class ProviderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Provider
         fields = ('id', 'name', 'address', 'country', 'city', 'state', 'zip',
-                  'phone', 'fax', 'toll_fee', 'email', 'start_time', 'end_time', 'user')
+                  'phone', 'fax', 'toll_free', 'email', 'start_time', 'end_time', 'user')
 
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email')
+        fields = ('id', 'username', 'email', 'is_superuser')
 
 
 class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = ('title', 'first_name', 'last_name', 'mobile', 'phone', 'fax', 'toll_fee', 'email')
+        fields = ('id', 'title', 'first_name', 'last_name', 'mobile', 'phone', 'fax', 'toll_free', 'email', 'provider', 'user')
 
 
 class NoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Note
-        fields = ('note', 'created', 'provider')
+        fields = ('id', 'note', 'created', 'provider', 'user')
