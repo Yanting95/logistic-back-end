@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^provider/$', views.contact_list, name='contact_list'),
     url(r'^provider/(?P<pk>\d+)$', views.contact_detail, name='contact_detail'),
     url(r'^login$', views.login, name='login'),
+    url(r'^logout/(?P<pk>\d+)$', views.logout, name='logout'),
     url(r'^provider/(?P<pkp>\d+)/contact/$', views.contact_list, name='contact_list'),
     url(r'^provider/(?P<pkp>\d+)/contact/(?P<pk>\d+)$', views.contact_detail, name='contact_detail'),
     url(r'^provider/(?P<pkp>\d+)/note/$', views.note_list, name='note_list'),

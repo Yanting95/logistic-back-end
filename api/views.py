@@ -9,7 +9,7 @@ from rest_framework.status import (
     HTTP_404_NOT_FOUND,
     HTTP_200_OK
 )
-
+from django.contrib.auth.models import User
 from provider.models import Provider, Contact, Note
 from api.serializers import ProviderSerializer, UserSerializer, ContactSerializer, NoteSerializer
 
@@ -74,6 +74,18 @@ def login(request):
     return Response({'user': serializer.data,
                      'token': token.key},
                     status=HTTP_200_OK)
+
+@api_view(["GET"])
+def logout(request, pk):
+    try:
+        user = User.objects.get(pk=pk)
+        token = Token.objects.get(user=user)
+    except (AttributeError):
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    token.delete()
+    return Response({"success": "Successfully logged out."},
+                    status=status.HTTP_200_OK)
 
 
 @api_view(['GET', 'POST'])
