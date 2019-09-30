@@ -29,11 +29,11 @@ class Contact(models.Model):
     fax = PhoneField(blank=True, null=True, help_text='Contact phone number')
     toll_free = PhoneField(blank=True, null=True, help_text='Contact phone number')
     email = models.EmailField(max_length=50, blank=True, null=True)
-    provider = models.ForeignKey(Provider, related_name='contact', on_delete=models.DO_NOTHING)
+    provider = models.ForeignKey(Provider, related_name='contact', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='contact_user', on_delete=models.DO_NOTHING)
 
 class Note(models.Model):
     note = models.TextField()
     created = models.DateField(auto_now=True)
-    provider = models.ForeignKey(Provider, related_name='note', on_delete=models.DO_NOTHING)
+    provider = models.ForeignKey(Provider, related_name='note', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='note_user', on_delete=models.DO_NOTHING)
